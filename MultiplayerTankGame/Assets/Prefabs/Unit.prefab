@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  agent: {fileID: 9096073073117061832}
+  _agent: {fileID: 9096073073117061832}
 --- !u!114 &4610256209857892628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ NavMeshAgent:
   m_Acceleration: 200
   avoidancePriority: 50
   m_AngularSpeed: 500
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

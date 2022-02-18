@@ -61,12 +61,16 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void StartSelectionArea()
     {
-        foreach (var selectedUnit in _selectedUnits)
+        if (!Keyboard.current.leftShiftKey.isPressed)
         {
-            selectedUnit.Deselect();
-        }
+            foreach (var selectedUnit in _selectedUnits)
+            {
+                selectedUnit.Deselect();
+            }
             
-        _selectedUnits.Clear();
+            _selectedUnits.Clear();    
+        }
+
         _unitSelectionArea.gameObject.SetActive(true);
         _startPosition = Mouse.current.position.ReadValue();
         
@@ -129,6 +133,11 @@ public class UnitSelectionHandler : MonoBehaviour
 
         foreach (var unit in _rtsPlayer.MyUnits)
         {
+            if (_selectedUnits.Contains(unit))
+            {
+                continue;
+            }
+            
             var screenPosition = _mainCamera.WorldToScreenPoint(unit.transform.position);
 
             if (screenPosition.x > min.x && 
