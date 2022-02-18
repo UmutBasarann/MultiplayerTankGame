@@ -10,6 +10,8 @@ namespace Combat
         [SerializeField] 
         private Targetable _target;
 
+        public Targetable Target => _target;
+
         #endregion
 
         #region Server
@@ -38,12 +40,6 @@ namespace Combat
         }
 
         #endregion
-
-        #endregion
-
-        #region Client
-
-        
 
         #endregion
     }

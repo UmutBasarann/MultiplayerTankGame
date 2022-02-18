@@ -17,6 +17,9 @@ public class UnitMovement : NetworkBehaviour
     [SerializeField] 
     private Targeter _targeter = null;
 
+    [SerializeField] 
+    private float chaseRange = 10f;
+
     #endregion
 
     #region Awake || Start || Update
@@ -24,6 +27,22 @@ public class UnitMovement : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
+        var target = _targeter.Target;
+        
+        if (target != null)
+        {
+            if ((target.transform.position - transform.position).sqrMagnitude > chaseRange * chaseRange)
+            {
+                _agent.SetDestination(_targeter.Target.transform.position);
+            }
+            else if (_agent.hasPath)
+            {
+                _agent.ResetPath();
+            }
+            
+            return;
+        }
+        
         if (!_agent.hasPath)
         {
             return;
