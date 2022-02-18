@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Combat;
 using Mirror;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,6 +22,11 @@ public class Unit : NetworkBehaviour
     private UnitMovement _unitMovement = null;
 
     public UnitMovement UnitMovement => _unitMovement;
+
+    [SerializeField] 
+    private Targeter _targeter = null;
+
+    public Targeter Targeter => _targeter;
     
     [SerializeField] 
     private UnityEvent onSelected = null;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Combat;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,6 +44,18 @@ namespace Units
                 return;
             }
 
+            if (hit.collider.TryGetComponent<Targetable>(out var targetable))
+            {
+                if (targetable.hasAuthority)
+                {
+                    TryMove(hit.point);
+                    return;
+                }
+
+                TryTarget(targetable);
+                return;
+            }
+            
             TryMove(hit.point);
         }
 
@@ -55,6 +68,18 @@ namespace Units
             foreach (var selectedUnit in _unitSelectionHandler.SelectedUnits)
             {
                 selectedUnit.UnitMovement.CmdMove(hitPoint);
+            }
+        }
+
+        #endregion
+
+        #region Unit: TryTarget
+
+        private void TryTarget(Targetable target)
+        {
+            foreach (var selectedUnit in _unitSelectionHandler.SelectedUnits)
+            {
+                selectedUnit.Targeter.CmdSetTarget(target.gameObject);
             }
         }
 
