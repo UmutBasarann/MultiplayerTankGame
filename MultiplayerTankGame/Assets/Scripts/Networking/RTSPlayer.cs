@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Mirror;
+using UnityEngine;
 
 namespace Networking
 {
@@ -7,7 +8,9 @@ namespace Networking
     {
         #region Fields
 
+        [SerializeField]
         private List<Unit> _myUnits = new List<Unit>();
+        public List<Unit> MyUnits => _myUnits;
 
         #endregion
 
