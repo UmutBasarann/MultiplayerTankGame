@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class RTSNetworkManager : NetworkManager
 {
+    #region Childs
+
     [SerializeField] 
     private GameObject _unitSpawnerPrefab = null;
-    
+
+    #endregion
+
+    #region Event: Server: OnServerAddPlayer
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
@@ -18,4 +24,6 @@ public class RTSNetworkManager : NetworkManager
         
         NetworkServer.Spawn(unitSpawnerInstance, conn);
     }
+
+    #endregion
 }

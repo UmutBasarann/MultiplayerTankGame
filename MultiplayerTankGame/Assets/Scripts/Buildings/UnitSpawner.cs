@@ -6,13 +6,19 @@ using UnityEngine.EventSystems;
 
 public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 {
+    #region Childs
+
     [SerializeField] 
     private GameObject _unitPrefab = null;
 
     [SerializeField] 
     private Transform _spawnPoint = null;
 
+    #endregion
+
     #region Server
+
+    #region Unit: CmdSpawnUnit
 
     [Command]
     private void CmdSpawnUnit()
@@ -24,7 +30,11 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     #endregion
 
+    #endregion
+
     #region Client
+
+    #region Event: OnPointerClick
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -40,6 +50,8 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
         
         CmdSpawnUnit();
     }
+
+    #endregion
 
     #endregion
 }

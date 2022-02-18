@@ -6,22 +6,29 @@ using UnityEngine.InputSystem;
 
 public class UnitSelectionHandler : MonoBehaviour
 {
+    #region Childs
+
     [SerializeField] 
     private LayerMask _layerMask = new LayerMask();
 
-    [SerializeField] 
-    private GameObject _highlight = null;
-    
-    private Camera _mainCamera;
-    private List<Unit> _selectedUnits = new List<Unit>();
+    #endregion
 
-    // Start is called before the first frame update
+    #region Fields
+
+    private Camera _mainCamera;
+    
+    private List<Unit> _selectedUnits = new List<Unit>();
+    public List<Unit> SelectedUnits => _selectedUnits;
+
+    #endregion
+
+    #region Awake || Start || Update
+
     void Start()
     {
         _mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -38,6 +45,10 @@ public class UnitSelectionHandler : MonoBehaviour
             ClearSelectionArea();
         }
     }
+
+    #endregion
+
+    #region Unit: ClearSelectionArea
 
     private void ClearSelectionArea()
     {
@@ -65,4 +76,6 @@ public class UnitSelectionHandler : MonoBehaviour
             selectedUnit.Select();
         }
     }
+
+    #endregion
 }
