@@ -44,6 +44,9 @@ namespace Networking
             {
                 return;
             }
+
+            Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
+            Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         }
 
         public override void OnStopClient()
@@ -52,6 +55,9 @@ namespace Networking
             {
                 return;
             }
+            
+            Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
+            Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
         }
 
         #endregion
