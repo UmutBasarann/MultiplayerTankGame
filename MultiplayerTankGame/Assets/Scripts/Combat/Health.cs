@@ -9,6 +9,7 @@ namespace Combat
         #region EventHandler || Action
 
         public event Action ServerOnDie;
+        public event Action<int, int> ClientOnHealthUpdated;
 
         #endregion
         
@@ -21,7 +22,7 @@ namespace Combat
 
         #region Fields
 
-        [SyncVar] 
+        [SyncVar(hook = nameof(HandleHealthUpdate))] 
         private int _currentHealth;
 
         #endregion
@@ -57,7 +58,10 @@ namespace Combat
 
         #region Client
 
-        
+        private void HandleHealthUpdate(int oldHealth, int newHealth)
+        {
+            ClientOnHealthUpdated?.Invoke(newHealth, _maxHealth);
+        }
 
         #endregion
     }
