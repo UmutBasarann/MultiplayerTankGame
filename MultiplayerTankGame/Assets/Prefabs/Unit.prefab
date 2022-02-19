@@ -156,12 +156,12 @@ GameObject:
   - component: {fileID: 2573681440624584165}
   - component: {fileID: 3034317371278872012}
   - component: {fileID: 6031831950086643389}
+  - component: {fileID: 5985182941550803756}
+  - component: {fileID: 7792576862387629790}
   - component: {fileID: 4610256209857892628}
   - component: {fileID: 6696223680673394195}
   - component: {fileID: 9096073073117061832}
   - component: {fileID: 7323789592448619865}
-  - component: {fileID: 5985182941550803756}
-  - component: {fileID: 7792576862387629790}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -204,6 +204,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _unitMovement: {fileID: 6902116916605544946}
   _targeter: {fileID: 3034317371278872012}
+  _health: {fileID: 5985182941550803756}
   onSelected:
     m_PersistentCalls:
       m_Calls:
@@ -301,6 +302,36 @@ MonoBehaviour:
   _fireRange: 11
   _fireRate: 1
   _rotationSpeed: 20
+--- !u!114 &5985182941550803756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931830825699052884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bff21d1a64744e7821609bfa9840a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _maxHealth: 100
+--- !u!114 &7792576862387629790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931830825699052884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964d56be998e4002ad4a10aaa2df0d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 5985182941550803756}
+  _healthBarParent: {fileID: 2601760750499238075}
+  _healthBarImage: {fileID: 2601760749787781506}
 --- !u!114 &4610256209857892628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,36 +418,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2.5, z: 3}
   m_Center: {x: 0, y: 1, z: 0.15}
---- !u!114 &5985182941550803756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8931830825699052884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bff21d1a64744e7821609bfa9840a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _maxHealth: 100
---- !u!114 &7792576862387629790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8931830825699052884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964d56be998e4002ad4a10aaa2df0d2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: {fileID: 5985182941550803756}
-  _healthBarParent: {fileID: 2601760750499238075}
-  _healthBarImage: {fileID: 2601760749787781506}
 --- !u!1001 &8931830825819176751
 PrefabInstance:
   m_ObjectHideFlags: 0

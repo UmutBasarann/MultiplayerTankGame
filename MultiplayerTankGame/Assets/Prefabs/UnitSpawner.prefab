@@ -136,6 +136,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _unitPrefab: {fileID: 8931830825699052884, guid: 999ed6726fa68b44eba0107ec4299f0f, type: 3}
   _spawnPoint: {fileID: 301848238073715137}
+  _health: {fileID: 1398274793446557073}
 --- !u!114 &7163738207378521446
 MonoBehaviour:
   m_ObjectHideFlags: 0

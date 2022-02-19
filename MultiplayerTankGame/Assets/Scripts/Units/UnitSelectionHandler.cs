@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Mirror;
 using Networking;
@@ -34,6 +35,8 @@ public class UnitSelectionHandler : MonoBehaviour
     void Start()
     {
         _mainCamera = Camera.main;
+
+        Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
     }
 
     void Update()
@@ -84,6 +87,15 @@ public class UnitSelectionHandler : MonoBehaviour
 
         _unitSelectionArea.sizeDelta = new Vector2(Mathf.Abs(areaWidth), Mathf.Abs(areaHeight));
         _unitSelectionArea.anchoredPosition = _startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
+    }
+
+    #endregion
+
+    #region OnDestroy
+
+    private void OnDestroy()
+    {
+        Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
     }
 
     #endregion
@@ -149,6 +161,15 @@ public class UnitSelectionHandler : MonoBehaviour
         }
 
         #endregion
+    }
+
+    #endregion
+
+    #region Event: AuthorityHandleUnitDespawned
+
+    private void AuthorityHandleUnitDespawned(Unit unit)
+    {
+        _selectedUnits.Remove(unit);
     }
 
     #endregion

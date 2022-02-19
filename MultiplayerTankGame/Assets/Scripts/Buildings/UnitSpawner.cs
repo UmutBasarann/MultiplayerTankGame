@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Combat;
 using Mirror;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,9 +15,24 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     [SerializeField] 
     private Transform _spawnPoint = null;
 
+    [SerializeField]
+    private Health _health = null;
+
     #endregion
 
     #region Server
+
+    public override void OnStartServer()
+    {
+        _health.ServerOnDie += ServerHandleDie;
+    }
+
+    
+
+    public override void OnStopServer()
+    {
+        _health.ServerOnDie -= ServerHandleDie;
+    }
 
     #region Unit: CmdSpawnUnit
 
@@ -52,6 +68,16 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     }
 
     #endregion
+
+    #endregion
+
+    #region Event: ServerHandleDie
+
+    [Server]
+    private void ServerHandleDie()
+    {
+        NetworkServer.Destroy(gameObject);
+    }
 
     #endregion
 }
