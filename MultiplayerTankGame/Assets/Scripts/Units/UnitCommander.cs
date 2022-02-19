@@ -79,7 +79,7 @@ namespace Units
         {
             foreach (var selectedUnit in _unitSelectionHandler.SelectedUnits)
             {
-                selectedUnit.Targeter.CmdSetTarget(target.gameObject);
+                selectedUnit.Targeter.CmdSetTarget(target);
             }
         }
 

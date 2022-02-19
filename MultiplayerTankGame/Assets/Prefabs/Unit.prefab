@@ -136,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8779241459566264497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.515, z: 2.7}
+  m_LocalPosition: {x: 0, y: 1.515, z: 2.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8931830825699052891}
@@ -247,7 +247,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _agent: {fileID: 9096073073117061832}
   _targeter: {fileID: 3034317371278872012}
-  chaseRange: 6.5
+  chaseRange: 10
 --- !u!114 &2573681440624584165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   _targeter: {fileID: 3034317371278872012}
   _projectilePrefab: {fileID: 3143839328721230749, guid: dcbd184123eb0ba4cadb9e379fa9b57c, type: 3}
   _projectileSpawnPoint: {fileID: 1856306138136975387}
-  _fireRange: 12
+  _fireRange: 11
   _fireRate: 1
   _rotationSpeed: 20
 --- !u!114 &4610256209857892628

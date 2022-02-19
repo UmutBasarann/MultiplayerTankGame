@@ -19,7 +19,7 @@ namespace Combat
         #region CmdSetTarget
 
         [Command]
-        public void CmdSetTarget(GameObject target)
+        public void CmdSetTarget(Targetable target)
         {
             if (!target.TryGetComponent<Targetable>(out var targetable))
             {
