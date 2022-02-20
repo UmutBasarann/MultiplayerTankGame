@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Buildings;
 using Combat;
 using Mirror;
 using UnityEngine;
@@ -60,6 +61,16 @@ public class UnitMovement : NetworkBehaviour
 
     #region Server
 
+    public override void OnStartServer()
+    {
+        GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
+    }
+    
+    public override void OnStopServer()
+    {
+        GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
+    }
+
     #region Unit: CmdMove
 
     [Command]
@@ -73,6 +84,16 @@ public class UnitMovement : NetworkBehaviour
     }
 
     #endregion
+
+    #endregion
+
+    #region Event: ServerHandleGameOver
+
+    [Server]
+    private void ServerHandleGameOver()
+    {
+        _agent.ResetPath();
+    }
 
     #endregion
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Buildings;
 using Mirror;
 using UnityEngine;
 
@@ -31,7 +32,25 @@ namespace Combat
 
         public override void OnStartServer()
         {
+            UnitBase.ServerOnPlayerDie += ServerHandlePlayerDie;
+            
             _currentHealth = _maxHealth;
+        }
+
+        [Server]
+        private void ServerHandlePlayerDie(int connectionId)
+        {
+            if (connectionId != connectionToClient.connectionId)
+            {
+                return;
+            }
+            
+            DealDamage(_currentHealth);
+        }
+
+        public override void OnStopServer()
+        {
+            UnitBase.ServerOnPlayerDie -= ServerHandlePlayerDie;
         }
 
         [Server]

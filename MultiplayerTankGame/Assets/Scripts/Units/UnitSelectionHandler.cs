@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Buildings;
 using Mirror;
 using Networking;
 using UnityEngine;
@@ -37,6 +38,7 @@ public class UnitSelectionHandler : MonoBehaviour
         _mainCamera = Camera.main;
 
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
+        GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
     }
 
     void Update()
@@ -96,8 +98,9 @@ public class UnitSelectionHandler : MonoBehaviour
     private void OnDestroy()
     {
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
+        GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
-
+    
     #endregion
 
     #region Unit: ClearSelectionArea
@@ -170,6 +173,15 @@ public class UnitSelectionHandler : MonoBehaviour
     private void AuthorityHandleUnitDespawned(Unit unit)
     {
         _selectedUnits.Remove(unit);
+    }
+
+    #endregion
+
+    #region Event: ClientHandleGameOver
+
+    private void ClientHandleGameOver(string obj)
+    {
+        enabled = false;
     }
 
     #endregion

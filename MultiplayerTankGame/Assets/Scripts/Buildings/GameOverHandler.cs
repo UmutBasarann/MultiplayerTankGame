@@ -9,6 +9,7 @@ namespace Buildings
     {
         #region EventHandler || Action
 
+        public static event Action ServerOnGameOver;
         public static event Action<string> ClientOnGameOver; 
 
         #endregion
@@ -70,6 +71,8 @@ namespace Buildings
             var playerId = _bases[0].connectionToClient.connectionId;
             
             RpcGameOver($"Player {playerId}");
+            
+            ServerOnGameOver?.Invoke();
         }
 
         #endregion

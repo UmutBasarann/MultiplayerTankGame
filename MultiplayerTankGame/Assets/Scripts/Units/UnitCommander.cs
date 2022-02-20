@@ -1,4 +1,5 @@
 ﻿using System;
+using Buildings;
 using Combat;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,8 @@ namespace Units
 
         private void Start()
         {
+            GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
+
             _mainCamera = Camera.main;
         }
 
@@ -61,6 +64,15 @@ namespace Units
 
         #endregion
 
+        #region OnDestroy
+
+        private void OnDestroy()
+        {
+            GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
+        }
+
+        #endregion
+
         #region Unit: TryMove
 
         private void TryMove(Vector3 hitPoint)
@@ -81,6 +93,15 @@ namespace Units
             {
                 selectedUnit.Targeter.CmdSetTarget(target);
             }
+        }
+
+        #endregion
+
+        #region Event: ClientHandleGameOver
+
+        private void ClientHandleGameOver(string winnerName)
+        {
+            enabled = false;
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using Buildings;
+using Mirror;
 using UnityEngine;
 
 namespace Combat
@@ -15,6 +16,19 @@ namespace Combat
         #endregion
 
         #region Server
+
+        public override void OnStartServer()
+        {
+            GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
+        }
+
+        public override void OnStopServer()
+        {
+            GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
+
+        }
+
+
 
         #region CmdSetTarget
 
@@ -40,6 +54,16 @@ namespace Combat
         }
 
         #endregion
+
+        #endregion
+
+        #region Event: ServerHandleGameOver
+
+        [Server]
+        private void ServerHandleGameOver()
+        {
+            ClearTarget();
+        }
 
         #endregion
     }
