@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -6,6 +7,12 @@ namespace Buildings
 {
     public class GameOverHandler : NetworkBehaviour
     {
+        #region EventHandler || Action
+
+        public static event Action<string> ClientOnGameOver; 
+
+        #endregion
+        
         #region Fields
 
         private List<UnitBase> _bases = new List<UnitBase>();
@@ -24,6 +31,16 @@ namespace Buildings
         {
             UnitBase.ServerOnBaseSpawned -= ServerHandleBaseSpawned;
             UnitBase.ServerOnBaseDespawned -= ServerHandleBaseDespawned;
+        }
+
+        #endregion
+
+        #region Client
+
+        [ClientRpc]
+        private void RpcGameOver(string winner)
+        {
+            ClientOnGameOver?.Invoke(winner);
         }
 
         #endregion
@@ -49,8 +66,10 @@ namespace Buildings
             {
                 return;
             }
+
+            var playerId = _bases[0].connectionToClient.connectionId;
             
-            Debug.Log("Game Over!");
+            RpcGameOver($"Player {playerId}");
         }
 
         #endregion
