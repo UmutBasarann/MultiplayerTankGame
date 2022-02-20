@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3143839328721230744}
   - component: {fileID: 3143839328721230747}
   - component: {fileID: 8551906255012477250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 8551906255012477250}
   _destroyAfterSeconds: 5
   _launchForce: 10
+  _damageToDeal: 20
 --- !u!33 &3143839328721230745
 MeshFilter:
   m_ObjectHideFlags: 0
