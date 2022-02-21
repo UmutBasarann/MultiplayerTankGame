@@ -30,6 +30,14 @@ namespace Networking
         private List<Building> _myBuildings = new List<Building>();
         public List<Building> MyBuildings => _myBuildings;
 
+        private Color _teamColor = new Color();
+
+        public Color TeamColor
+        {
+            get => _teamColor;
+            set => _teamColor = value;
+        }
+
         [SyncVar(hook = nameof(ClientHandleResourcesUpdated))]
         private int _resources = 500;
 

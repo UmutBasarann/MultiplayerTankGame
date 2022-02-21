@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using Buildings;
 using Mirror;
+using Networking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +21,9 @@ public class RTSNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
+
+        var rtsPlayer = conn.identity.GetComponent<RTSPlayer>();
+        rtsPlayer.TeamColor = new Color(Random.Range(0, 1), Random.Range(0, 1), Random.Range(0, 1));
 
         var playerTransform = conn.identity.transform;
 
