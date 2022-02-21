@@ -18,6 +18,9 @@ namespace Networking
 
         [SerializeField] private Building[] _buildings = new Building[0];
         [SerializeField] private LayerMask _buildingBlockLayer = new LayerMask();
+        [SerializeField] private Transform _cameraTransform = null;
+        public Transform CameraTransform => _cameraTransform;
+        
         [SerializeField] private float _buildingRangeLimit = 5f;
 
         #endregion

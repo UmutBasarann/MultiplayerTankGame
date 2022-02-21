@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 4069666944142297292}
   - component: {fileID: 8794674566441490096}
   - component: {fileID: 7898368887427110896}
+  - component: {fileID: 4184397561047529950}
   m_Layer: 0
   m_Name: Minimap
   m_TagString: Untagged
@@ -279,3 +280,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &4184397561047529950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393040616507602216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8162b9e09ed4c71979900c62074a6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minimapRect: {fileID: 4069666944142297292}
+  _mapScale: 10
+  _offset: -6
