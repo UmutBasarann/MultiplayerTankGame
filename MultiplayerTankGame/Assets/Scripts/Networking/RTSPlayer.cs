@@ -17,6 +17,8 @@ namespace Networking
         #region Childs
 
         [SerializeField] private Building[] _buildings = new Building[0];
+        [SerializeField] private LayerMask _buildingBlockLayer = new LayerMask();
+        [SerializeField] private float _buildingRangeLimit = 5f;
 
         #endregion
         
@@ -80,9 +82,23 @@ namespace Networking
                 return;
             }
 
+            if (_resources < buildingToPlace.Price)
+            {
+                return;
+            }
+
+            var buildingCollider = buildingToPlace.GetComponent<BoxCollider>();
+
+            if (!CanPlaceBuilding(buildingCollider, spawnPoint))
+            {
+                return;
+            }
+
             var buildingInstance = Instantiate(buildingToPlace.gameObject, spawnPoint, buildingToPlace.transform.rotation);
             
             NetworkServer.Spawn(buildingInstance, connectionToClient);
+
+            _resources -= buildingToPlace.Price;
         }
 
         #endregion
@@ -104,6 +120,7 @@ namespace Networking
             Building.AuthorityOnBuildingSpawned += AuthorityHandleBuildingSpawned;
             Building.AuthorityOnBuildingDespawned += AuthorityHandleBuildingDespawned;
         }
+        
 
         public override void OnStopClient()
         {
@@ -122,6 +139,28 @@ namespace Networking
         private void ClientHandleResourcesUpdated(int oldResources, int newResources)
         {
             ClientOnResourcesUpdated?.Invoke(newResources);
+        }
+
+        #endregion
+
+        #region CanPlaceBuilding
+
+        public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 spawnPoint)
+        {
+            if (Physics.CheckBox(spawnPoint + buildingCollider.center, buildingCollider.size / 2, Quaternion.identity, _buildingBlockLayer))
+            {
+                return false;
+            }
+            
+            foreach (var building in _myBuildings)
+            {
+                if ((spawnPoint - building.transform.position).sqrMagnitude <= _buildingRangeLimit * _buildingRangeLimit)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         #endregion

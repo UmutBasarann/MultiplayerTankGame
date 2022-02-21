@@ -32,6 +32,7 @@ namespace Buildings
         private Camera _mainCamera;
         private GameObject _buildingPreviewInstance;
         private Renderer _buildingRendererInstance;
+        private BoxCollider _buildingCollider;
 
         #endregion
 
@@ -43,6 +44,8 @@ namespace Buildings
 
             _icon.sprite = _building.Icon;
             _txtPrice.text = _building.Price.ToString();
+
+            _buildingCollider = _building.GetComponent<BoxCollider>();
         }
 
         private void Update()
@@ -78,6 +81,10 @@ namespace Buildings
             {
                 _buildingPreviewInstance.SetActive(true);
             }
+
+            var color = _rtsPlayer.CanPlaceBuilding(_buildingCollider, hit.point) ? Color.green : Color.red;
+            
+            _buildingRendererInstance.material.SetColor("_BaseColor", color);
         }
 
         #endregion
@@ -87,6 +94,11 @@ namespace Buildings
         public void OnPointerDown(PointerEventData eventData)
         {
             if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
+
+            if (_rtsPlayer.Resources < _building.Price)
             {
                 return;
             }

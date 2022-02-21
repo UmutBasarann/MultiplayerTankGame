@@ -28,8 +28,6 @@ namespace Combat
 
         }
 
-
-
         #region CmdSetTarget
 
         [Command]
