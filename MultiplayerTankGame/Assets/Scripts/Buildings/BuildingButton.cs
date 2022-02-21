@@ -111,7 +111,7 @@ namespace Buildings
             var ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _floorMask))
             {
-                
+                _rtsPlayer.CmdTryPlaceBuilding(_building.Id, hit.point);
             }
             
             Destroy(_buildingPreviewInstance);

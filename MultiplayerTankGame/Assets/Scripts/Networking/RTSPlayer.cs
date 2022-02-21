@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Buildings;
 using Mirror;
 using UnityEngine;
@@ -7,6 +8,18 @@ namespace Networking
 {
     public class RTSPlayer : NetworkBehaviour
     {
+        #region EventHandler || Action
+
+        public event Action<int> ClientOnResourcesUpdated; 
+
+        #endregion
+        
+        #region Childs
+
+        [SerializeField] private Building[] _buildings = new Building[0];
+
+        #endregion
+        
         #region Fields
         
         private List<Unit> _myUnits = new List<Unit>();
@@ -14,6 +27,15 @@ namespace Networking
 
         private List<Building> _myBuildings = new List<Building>();
         public List<Building> MyBuildings => _myBuildings;
+
+        [SyncVar(hook = nameof(ClientHandleResourcesUpdated))]
+        private int _resources = 500;
+
+        public int Resources
+        {
+            get => _resources;
+            set => _resources = value;
+        }
 
         #endregion
 
@@ -36,6 +58,34 @@ namespace Networking
             Building.ServerOnBuildingSpawned -= ServerHandleBuildingSpawned;
             Building.ServerOnBuildingDespawned -= ServerHandleBuildingDespawned;
         }
+
+        #region Server
+
+        [Command]
+        public void CmdTryPlaceBuilding(int buildingId, Vector3 spawnPoint)
+        {
+            Building buildingToPlace = null;
+            
+            foreach (var building in _buildings)
+            {
+                if (building.Id == buildingId)
+                {
+                    buildingToPlace = building;
+                    break;
+                }
+            }
+
+            if (buildingToPlace == null)
+            {
+                return;
+            }
+
+            var buildingInstance = Instantiate(buildingToPlace.gameObject, spawnPoint, buildingToPlace.transform.rotation);
+            
+            NetworkServer.Spawn(buildingInstance, connectionToClient);
+        }
+
+        #endregion
 
         #endregion
 
@@ -67,6 +117,11 @@ namespace Networking
             
             Building.AuthorityOnBuildingSpawned -= AuthorityHandleBuildingSpawned;
             Building.AuthorityOnBuildingDespawned -= AuthorityHandleBuildingDespawned;
+        }
+
+        private void ClientHandleResourcesUpdated(int oldResources, int newResources)
+        {
+            ClientOnResourcesUpdated?.Invoke(newResources);
         }
 
         #endregion
