@@ -33,6 +33,9 @@ namespace Buildings
 
         public int Price => _price;
 
+        [SerializeField] private GameObject _buildingPreview = null;
+        public GameObject BuildingPreview => _buildingPreview;
+
         #endregion
 
         #region Server
