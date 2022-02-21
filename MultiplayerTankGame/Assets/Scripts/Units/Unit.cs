@@ -30,6 +30,11 @@ public class Unit : NetworkBehaviour
 
     [SerializeField] 
     private Health _health = null;
+
+    [SerializeField] 
+    private int _resourceCost = 10;
+
+    public int ResourceCost => _resourceCost;
     
     [SerializeField] 
     private UnityEvent onSelected = null;
