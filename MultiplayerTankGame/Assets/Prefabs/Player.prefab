@@ -66,7 +66,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _buildings:
-  - {fileID: 8077342681080610985, guid: 51c40d6c7f306274f911e001198daff0, type: 3}
+  - {fileID: 8487241350147896817, guid: 785c0fabfbc2a80488208a1dd5024309, type: 3}
   - {fileID: 8077342681080610985, guid: 6697c70fb75d83641bdb67e7872c3d20, type: 3}
   _buildingBlockLayer:
     serializedVersion: 2
@@ -88,7 +88,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _playerCameraTransform: {fileID: 6773165311783404452}
-  _speed: 25
+  _speed: 18
   _screenBorderThickness: 10
   _screenXLimits: {x: -45, y: 45}
   _screenZlimits: {x: -55, y: 35}

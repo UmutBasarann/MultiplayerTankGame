@@ -8,7 +8,7 @@ namespace Networking
     {
         #region Childs
 
-        [SerializeField] private Renderer[] colorRenderers = Array.Empty<Renderer>();
+        [SerializeField] private Renderer[] colorRenderers = new Renderer[0];
 
         #endregion
 
